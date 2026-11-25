@@ -7,7 +7,8 @@
    the candidates.
    --ink, --sage-ink and the two tints are derived shades, added so small
    text passes contrast on sage and on paper.
-   The door from the Pastel mark is used sparingly: the street of houses,
+   The logo is the name alone in Gabarito Bold, drawn as outlines (see .wordmark).
+   The door from the first Pastel mark is used sparingly: the street of houses,
    the two audience doors and the frames around the work. Nowhere else. */
 
 :root {
@@ -127,8 +128,19 @@ h4 { margin: 0; font: 500 0.86rem/1.3 var(--sans); }
 .site-header.is-scrolled { border-bottom-color: var(--line); }
 .site-header.is-hidden { transform: translateY(-100%); }
 .site-header__in { height: 100%; display: flex; align-items: center; gap: 28px; }
-.logo { display: block; margin-right: auto; }
-.logo img { height: 34px; width: auto; }
+/* The logo is the name alone, in lowercase Gabarito Bold, drawn as outlines
+   (js/site.js puts the shapes in; img/pastel-wordmark-gabarito.svg is the
+   same drawing as a file). Its size follows font-size: the drawing is 0.871em
+   tall, and the margins make the whole box 1em tall with the letters where
+   a line of Gabarito text would put them. */
+.wordmark { line-height: 1; }
+.wordmark svg { display: block; height: 0.871em; width: auto; margin: 0.184em 0 -0.055em; fill: currentColor; }
+/* Lifted a touch so the body of the letters, not the tail of the p, lines up
+   with the menu. */
+.logo { display: flex; align-items: flex-start; gap: 0.22em; margin-right: auto; position: relative; top: -0.06em; font-size: 2.475rem; color: var(--charcoal); text-decoration: none; }
+/* The fan of color chips beside the name. Sized so the chips are as tall as
+   the l and t, and stand on the same line as the letters. */
+.wordmark .logo__mark { flex: none; width: 0.8323em; height: 0.7567em; margin: 0.169em 0 0; }
 .nav { display: flex; gap: clamp(18px, 2.4vw, 36px); }
 .nav a { font-size: 0.92rem; text-decoration: none; padding: 6px 0; position: relative; }
 .nav a::after {
@@ -154,6 +166,44 @@ h4 { margin: 0; font: 500 0.86rem/1.3 var(--sans); }
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s 0.3s;
 }
 .menu.is-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+/* Quick menu. While the header is away (see the scroll rule in js/site.js) a
+   small round button holds its top corner and opens a short list of the same
+   links, so nobody has to scroll back up to move around. */
+.quick { position: fixed; inset: 0 0 auto 0; z-index: 58; height: 0; pointer-events: none; }
+.quick__in { position: relative; }
+.quick__btn, .quick__menu {
+  position: absolute; right: var(--gutter); pointer-events: auto;
+  background: var(--paper); border: 1px solid var(--line);
+  opacity: 0; visibility: hidden; transform: translateY(-8px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s 0.3s, background 0.25s var(--ease), color 0.25s var(--ease);
+}
+.quick__btn {
+  top: 14px; width: 44px; height: 44px; padding: 0; border-radius: 50%;
+  display: grid; place-items: center; color: var(--charcoal); cursor: pointer;
+  box-shadow: 0 8px 20px -10px rgba(47, 51, 53, 0.45);
+}
+.quick__btn:hover { background: var(--white); }
+/* Three lines, drawn as backgrounds so they are the same weight on any screen. */
+.quick__btn i {
+  display: block; width: 18px; height: 12px;
+  background:
+    linear-gradient(currentColor, currentColor) 0 0 / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 50% / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat;
+}
+/* Open: the lines become a cross. The button keeps its light face so it shows
+   on the dark sections too. */
+.quick.is-open .quick__btn i { position: relative; background: none; }
+.quick.is-open .quick__btn i::before, .quick.is-open .quick__btn i::after { content: ""; position: absolute; inset: 5px 0 auto; height: 2px; background: currentColor; transform: rotate(45deg); }
+.quick.is-open .quick__btn i::after { transform: rotate(-45deg); }
+.quick__menu {
+  top: 68px; min-width: 230px; padding: 8px 22px 22px; border-radius: var(--radius);
+  display: grid; box-shadow: 0 26px 50px -26px rgba(47, 51, 53, 0.5);
+}
+.quick.is-on .quick__btn, .quick.is-on.is-open .quick__menu { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.quick__menu a:not(.btn) { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 0.98rem; text-decoration: none; }
+.quick__menu a:not(.btn):hover { color: var(--sage-ink); }
+.quick__menu .btn { margin-top: 20px; justify-content: center; }
 .menu a.menu__link { display: block; font-size: clamp(2.2rem, 10vw, 3.4rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.25; text-decoration: none; }
 
 /* Hero */
@@ -460,7 +510,7 @@ h4 { margin: 0; font: 500 0.86rem/1.3 var(--sans); }
 .site-footer.on-tint, .site-footer.on-tint .street { background: var(--peach-tint); }
 .site-footer__in { padding-block: clamp(48px, 7vw, 96px) 28px; }
 .site-footer__top { display: grid; grid-template-columns: 5fr 2fr 2fr 3fr; gap: clamp(24px, 4vw, 56px); }
-.site-footer__brand img { height: clamp(46px, 6vw, 76px); width: auto; }
+.site-footer__brand .wordmark { display: block; font-size: clamp(2.75rem, 5.2vw, 4.25rem); color: var(--white); }
 .site-footer__brand p { margin-top: 22px; max-width: 24em; color: rgba(248, 247, 244, 0.8); font-size: 0.95rem; }
 .site-footer h3 { font-family: var(--sans); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
 .site-footer li { margin-bottom: 9px; font-size: 0.95rem; }
@@ -500,7 +550,7 @@ h4 { margin: 0; font: 500 0.86rem/1.3 var(--sans); }
 /* Phone */
 @media (max-width: 640px) {
   :root { --header: 64px; }
-  .logo img { height: 29px; }
+  .logo { font-size: 2.145rem; }
   .doors, .features, .results, .case-gallery, .sheet__grid, .path, .fit { grid-template-columns: 1fr; }
   .door__leaf { padding: 30% 14% 44px; }
   .door__knob { right: 24px; width: 16px; height: 16px; }
@@ -532,4 +582,5 @@ h4 { margin: 0; font: 500 0.86rem/1.3 var(--sans); }
   .tile__art, .door__leaf, .street .bld, .proj__browser, .proj__phone { transition: none; }
   .proj:hover .proj__browser, .proj:hover .proj__phone { transform: none; }
   .door:hover .door__leaf { transform: none; }
+  .quick__btn, .quick__menu { transition: none; }
 }
