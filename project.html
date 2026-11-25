@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project | Pastel</title>
+  <link rel="icon" href="img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="img/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css?v=16">
+  <script>document.documentElement.className = "js";</script>
+</head>
+<body data-footer-on="paper">
+
+<!-- Project page. Everything specific to a project (name, scope, place,
+     wording, screenshots) is filled in from js/work.js using the ?p= address. -->
+<main id="main" data-case>
+
+  <section class="page-head case-head" style="padding-bottom:0">
+    <div class="wrap">
+      <p class="label" data-reveal><a href="work.html" style="text-decoration:none">&larr; All work</a></p>
+      <h1 data-case-title data-reveal style="--d:.06s">Project</h1>
+      <p class="case-tag" data-case-tag data-reveal style="--d:.12s"></p>
+      <figure class="case-hero" data-case-hero data-reveal style="--d:.18s"></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap case-body">
+      <dl class="case-meta" data-reveal>
+        <div><dt>Client</dt><dd data-case-client></dd></div>
+        <div><dt>What we did</dt><dd data-case-scope></dd></div>
+        <div><dt>Location</dt><dd data-case-place></dd></div>
+      </dl>
+      <div class="case-text" data-reveal style="--d:.08s">
+        <h2>The project</h2>
+        <p data-case-about></p>
+        <h2>Our part</h2>
+        <p data-case-did></p>
+        <p class="note">Draft page. The fuller story of this project, and its results, are still to be written.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="case-gallery">
+        <figure class="g-half" data-case-g1 data-reveal></figure>
+        <figure class="g-half g-offset" data-case-g2 data-reveal style="--d:.1s"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <a class="next" href="work.html" data-case-next data-reveal>
+        <div><p class="label">Next project</p><h2>Next</h2></div>
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/work.js?v=16"></script>
+<script src="js/site.js?v=16"></script>
+</body>
+</html>
